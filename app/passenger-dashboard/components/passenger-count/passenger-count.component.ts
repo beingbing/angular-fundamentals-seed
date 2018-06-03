@@ -5,10 +5,10 @@ import { Component, Input } from '@angular/core';
     selector: 'passenger-count',
     template: `<div><h3>Airline Passengers</h3>
         <div>
-            Total Passengers: {{item.length}}
+            Total Passengers: {{item?.length}}
         </div>
         <div>
-            Total checked in: {{checkedInCount()}} / {{item.length}}
+            Total checked in: {{checkedInCount()}} / {{item?.length}}
         </div>
     </div>`
 })
