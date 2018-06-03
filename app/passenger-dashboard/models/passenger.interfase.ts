@@ -7,7 +7,7 @@
     id: number,
     fullName: string,
     checkedIn: boolean,
-    checkedInDate?: number | null,
+    checkedInDate?: number,
     // children?: Child[] | null
     baggage: string
   }
