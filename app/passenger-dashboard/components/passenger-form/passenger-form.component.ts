@@ -9,11 +9,19 @@ import { Component, Input } from '@angular/core';
     {{detail | json}}
         <div>
             pasenger name:
-                <input type="text" name="fullname" [ngModel]="detail?.fullName">
+                <input type="text" name="fullname" #fullname="ngModel" required [ngModel]="detail?.fullName">
+                <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+                    Passenger name is required
+                </div>
+                {{fullname.errors | json}}
         </div>
         <div>
         pasenger ID:
-        <input type="number" name="id" [ngModel]="detail?.id">
+        <input type="number" name="id" required #id="ngModel" [ngModel]="detail?.id">
+        <div *ngIf="id.errors?.required && id.dirty" class="error">
+                    Passenger ID is required
+                </div>
+        {{id.errors | json}}
         </div>
         
         <div>
@@ -36,16 +44,9 @@ import { Component, Input } from '@angular/core';
             </select>
         </div>
 
-        <div>
-            Luggage: 
-            <select name="baggage" [ngModel]="detail?.baggage">
-                <option *ngFor="let item of baggage" [ngValue]="item.key">
-                    {{item.value}}
-                </option>
-            </select>
-        </div>
-
-        {{form.value | json}}
+        <div>{{form.value | json}}</div>
+        <div>Valid: {{form.valid | json}}</div>
+        <div>Invalid: {{form.invalid | json}}</div>
     </form>`
 })
 export class PassengerFormComponent {
