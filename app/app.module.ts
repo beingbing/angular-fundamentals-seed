@@ -10,15 +10,18 @@ import { Routes } from '@angular/router/src/config';
 
 
 import { PassengerDashboardModule } from './passenger-dashboard/passenger-dashboard.module';
+import { NotFoundComponent } from './not-found.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, pathMatch: 'full'}
+  {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
