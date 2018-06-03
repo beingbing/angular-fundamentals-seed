@@ -1,6 +1,7 @@
 import { PassengerDashboardService } from './../../passenger-dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { Passenger } from '../../models/passenger.interfase';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'passenger-dashboard',
@@ -10,7 +11,7 @@ import { Passenger } from '../../models/passenger.interfase';
         <passenger-count [item]="passengers"></passenger-count>
         <div *ngFor="let passenger of passengers;">{{passenger.fullName}}</div>
         <passenger-detail *ngFor="let passenger of passengers;"
-        [detail]="passenger" (remove)="handleRemove($event)" (edit)="handleEdit($event)"></passenger-detail>
+        [detail]="passenger" (remove)="handleRemove($event)" (edit)="handleEdit($event)" (view)="handleView($event)"></passenger-detail>
         </div>
     `
 })
@@ -18,7 +19,8 @@ export class PassengerDashboardComponent implements OnInit {
     public passengers: Passenger[];
 
     constructor(
-        private passengerService: PassengerDashboardService
+        private passengerService: PassengerDashboardService,
+        private router: Router
     ) { }
 
     public ngOnInit() {
@@ -48,6 +50,10 @@ export class PassengerDashboardComponent implements OnInit {
                 return passenger;
             });
         }, (error: any) => {console.log('error', error)});
+    }
+
+    public handleView(event: Passenger) {
+        this.router.navigate(['/passenger', event.id]);
     }
 
 }

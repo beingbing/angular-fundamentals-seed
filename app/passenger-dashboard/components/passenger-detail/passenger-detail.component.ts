@@ -16,12 +16,14 @@ import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angu
     </div>-->
     <button (click)="toggleEdit()">{{editing ? 'Done': 'Edit'}}</button>
     <button (click)="onRemove()">Remove</button>
+    <button (click)="goToPassenger()">View</button>
     </div>`
 })
 export class PassengerDetailComponent implements OnChanges, OnInit {
     @Input() public detail: Passenger;
-    @Output() public remove: EventEmitter<Passenger> = new EventEmitter();
-    @Output() public edit: EventEmitter<Passenger> = new EventEmitter();
+    @Output() public remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+    @Output() public edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+    @Output() public view: EventEmitter<any> = new EventEmitter<Passenger>();
     public editing: boolean = false;
     constructor() {}
 
@@ -49,5 +51,9 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
     public ngOnInit() {
         console.log('ngOnInit');
+    }
+
+    public goToPassenger() {
+        this.view.emit(this.detail);
     }
 }
