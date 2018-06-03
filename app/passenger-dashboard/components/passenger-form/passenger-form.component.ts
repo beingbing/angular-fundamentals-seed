@@ -6,11 +6,10 @@ import { Component, Input } from '@angular/core';
     selector: 'passenger-form',
     styleUrls: ['passenger-form.component.scss'],
     template: `<form #form="ngForm" novalidate>
-    {{detail | json}}
         <div>
             pasenger name:
                 <input type="text" name="fullname" #fullname="ngModel" required [ngModel]="detail?.fullName">
-                <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+                <div *ngIf="fullname.errors?.required && fullname.touched" class="error">
                     Passenger name is required
                 </div>
                 {{fullname.errors | json}}
@@ -43,10 +42,9 @@ import { Component, Input } from '@angular/core';
                 </option>
             </select>
         </div>
-
-        <div>{{form.value | json}}</div>
-        <div>Valid: {{form.valid | json}}</div>
-        <div>Invalid: {{form.invalid | json}}</div>
+        <button type="submit" [disabled]="form.invalid">
+            Update passenger
+        </button>
     </form>`
 })
 export class PassengerFormComponent {
