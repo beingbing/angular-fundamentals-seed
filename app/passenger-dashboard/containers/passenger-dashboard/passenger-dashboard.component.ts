@@ -7,6 +7,7 @@ import { Passenger } from '../../models/passenger.interfase';
     template: `
         <div>
         <passenger-count [item]="passengers"></passenger-count>
+        <div *ngFor="let passenger of passengers;">{{passenger.fullName}}</div>
         <passenger-detail *ngFor="let passenger of passengers;"
         [detail]="passenger" (remove)="handleRemove($event)" (edit)="handleEdit($event)"></passenger-detail>
         </div>
@@ -65,7 +66,6 @@ export class PassengerDashboardComponent implements OnInit {
             }
             return passenger;
         });
-        console.log(this.passengers);
     }
 
 }

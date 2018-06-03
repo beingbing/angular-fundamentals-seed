@@ -1,5 +1,5 @@
 import { Passenger } from './../../models/passenger.interfase';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core';
 @Component({
     selector: 'passenger-detail',
     styleUrls: ['passenger-detail.component.scss'],
@@ -18,7 +18,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     <button (click)="onRemove()">Remove</button>
     </div>`
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent implements OnChanges, OnInit {
     @Input() public detail: Passenger;
     @Output() public remove: EventEmitter<Passenger> = new EventEmitter();
     @Output() public edit: EventEmitter<Passenger> = new EventEmitter();
@@ -38,5 +38,16 @@ export class PassengerDetailComponent {
 
     public onRemove() {
         this.remove.emit(this.detail);
+    }
+
+    public ngOnChanges(changes) {
+        console.log('ngOnChanges');
+        if (changes.datial) {
+            this.detail = Object.assign({}, changes.detail.currentValue);
+        }
+    }
+
+    public ngOnInit() {
+        console.log('ngOnInit');
     }
 }
