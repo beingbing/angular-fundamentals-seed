@@ -8,7 +8,7 @@ import { Passenger } from '../../models/passenger.interfase';
         <div>
         <passenger-count [item]="passengers"></passenger-count>
         <passenger-detail *ngFor="let passenger of passengers;"
-        [detail]="passenger"></passenger-detail>
+        [detail]="passenger" (remove)="handleRemove($event)" (edit)="handleEdit($event)"></passenger-detail>
         </div>
     `
 })
@@ -50,6 +50,14 @@ export class PassengerDashboardComponent implements OnInit {
             checkedInDate: null,
             children: null
         }];
+    }
+
+    public handleRemove(event: Event) {
+        console.log('event ', event);
+    }
+
+    public handleEdit(event: Event) {
+        console.log(event);
     }
 
 }
