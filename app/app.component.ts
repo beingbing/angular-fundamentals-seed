@@ -30,6 +30,10 @@ export class AppComponent {
       link: '/oops',
       name: '404',
       exact: false
+    },{
+      link: '/passenger',
+      name: 'passenger',
+      exact: false
     }
   ];
   public name: string = '';
