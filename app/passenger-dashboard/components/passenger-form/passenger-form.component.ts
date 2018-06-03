@@ -1,11 +1,12 @@
 import { Baggage } from './../../models/baggage.interface';
 import { Passenger } from './../../models/passenger.interfase';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core/src/facade/async';
 
 @Component({
     selector: 'passenger-form',
     styleUrls: ['passenger-form.component.scss'],
-    template: `<form #form="ngForm" novalidate>
+    template: `<form (submit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
         <div>
             pasenger name:
                 <input type="text" name="fullname" #fullname="ngModel" required [ngModel]="detail?.fullName">
@@ -49,6 +50,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PassengerFormComponent {
     @Input() detail: Passenger;
+    @Output() update: EventEmitter<Passenger> = new EventEmitter<Passenger>();
     public baggage: Baggage[] = [{
         key: 'none',
         value: 'No Baggage'
@@ -69,6 +71,12 @@ export class PassengerFormComponent {
     public toggleCheckIn(checkedIn: boolean) {
         if (checkedIn) {
             this.detail.checkedInDate = Date.now();
+        }
+    }
+
+    public handleSubmit(passenger: Passenger, isValid: boolean) {
+        if(isValid) {
+            this.update.emit(passenger);
         }
     }
 }
