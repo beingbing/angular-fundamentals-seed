@@ -1,3 +1,4 @@
+import { Baggage } from './../../models/baggage.interface';
 import { Passenger } from './../../models/passenger.interfase';
 import { Component, Input } from '@angular/core';
 
@@ -26,11 +27,42 @@ import { Component, Input } from '@angular/core';
             <input type="number" name="checkInDate" [ngModel]="detail?.checkedInDate">
         </div>
 
+        <div>
+            Luggage: 
+            <select name="baggage" [ngModel]="detail?.baggage">
+                <option *ngFor="let item of baggage" [value]="item.key" [selected]="item.key === detail?.baggage">
+                    {{item.value}}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            Luggage: 
+            <select name="baggage" [ngModel]="detail?.baggage">
+                <option *ngFor="let item of baggage" [ngValue]="item.key">
+                    {{item.value}}
+                </option>
+            </select>
+        </div>
+
         {{form.value | json}}
     </form>`
 })
 export class PassengerFormComponent {
     @Input() detail: Passenger;
+    public baggage: Baggage[] = [{
+        key: 'none',
+        value: 'No Baggage'
+    },{
+        key: 'hand-only',
+        value: 'Hand Baggage'
+    },{
+        key: 'hold-only',
+        value: 'Hold Baggage'
+    },{
+        key: 'hand-hold',
+        value: 'Hand and Hold Baggage'
+    }];
     constructor() {
         //
     }
