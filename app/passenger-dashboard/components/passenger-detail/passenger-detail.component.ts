@@ -11,9 +11,9 @@ import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angu
     Check in date: 
     {{detail.checkedInDate ? (detail.checkedInDate | date: 'yMMMMd' | uppercase) : 'Not checked In'}}
     </div>
-    <div class="children">
+    <!--<div class="children">
         Children: {{detail.children?.length || 0}}
-    </div>
+    </div>-->
     <button (click)="toggleEdit()">{{editing ? 'Done': 'Edit'}}</button>
     <button (click)="onRemove()">Remove</button>
     </div>`
