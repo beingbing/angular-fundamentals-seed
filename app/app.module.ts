@@ -13,7 +13,7 @@ import { PassengerDashboardModule } from './passenger-dashboard/passenger-dashbo
 import { NotFoundComponent } from './not-found.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: '', redirectTo: 'passenger', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];
 
